@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import datetime
-import wighted
+
 
 if __name__=="__main__":
 
@@ -77,7 +77,7 @@ if __name__=="__main__":
 
     button_1=Button(root,text="Register",font=20,bg="green",command=register)
     button_2=Button(root,text="Quit",font=20,bg="red",command=root.destroy)
-    button_3=Button(root,text="Reset",font=20,bg="orange",command=wighted.reset)
+    button_3=Button(root,text="Reset",font=20,bg="orange",command=reset)
     button_4=Button(root,text="check",font=20,bg="orange",)
 
     button_1.grid(row=8,column=1)
@@ -85,7 +85,7 @@ if __name__=="__main__":
     button_3.place(x=300,y=150)
     button_4.place(x=300,y=110)
 
-    print(__name__)
+
 
 
     root.mainloop()
