@@ -19,6 +19,7 @@ def main():
     label_4=Label(root,text="Phone number : ",font=20,bg="lightblue")
     label_5=Label(root,text="Truck No : ",font=20,bg="lightblue")
     label_6=Label(root,text="AL-SAEDI Transportation Co\n 2007-2019 ",font=20,bg="gray")
+    label_7=Label(root,text="Employee info :",font=40)
 
     # =================================================Entries==============================================
 
@@ -30,20 +31,21 @@ def main():
 
 
     #================================================Labels place==============================================
-    label_1.grid(row=0,sticky=E)
-    label_2.grid(row=2,sticky=E)
-    label_3.grid(row=4,sticky=E)
-    label_4.grid(row=6,sticky=E)
-    label_5.grid(row=7,sticky=E)
+    label_1.grid(row=1,sticky=E)
+    label_2.grid(row=3,sticky=E)
+    label_3.grid(row=5,sticky=E)
+    label_4.grid(row=7,sticky=E)
+    label_5.grid(row=8,sticky=E)
     label_6.place(x=100,y=250)
+    label_7.grid(row=0,column=1)
 
 
     #=================================================Entries place=========================================
-    entrey_1.grid(row=0,column=1)
-    entrey_2.grid(row=2,column=1)
-    entrey_3.grid(row=4,column=1)
-    entrey_4.grid(row=6,column=1)
-    entrey_5.grid(row=7,column=1)
+    entrey_1.grid(row=1,column=1)
+    entrey_2.grid(row=3,column=1)
+    entrey_3.grid(row=5,column=1)
+    entrey_4.grid(row=7,column=1)
+    entrey_5.grid(row=8,column=1)
 
     #=================================================Functions============================================
     def register():
@@ -57,8 +59,11 @@ def main():
 
                 # Create a database
                 db = sqlite3.connect("database.db")
-                db.execute("create table if not exists employees(driverName text,NatioanlID int,address text,Phone int,truckNO int)")
+                db.execute("create table if not exists employees(driverName text,NatioanlID int,address text,Phone int,\
+                 truckNO int)")
                 db.execute("insert into employees (driverName,NatioanlID,address,Phone,truckNO) values (?,?,?,?,?)",(name,id,address,phone,truck))
+                db.commit()
+                db.close()
                 messagebox.showinfo("completed","Registered successfully!")
             else :
                 entrey_1.delete(0,END)
@@ -84,7 +89,7 @@ def main():
     button_3=Button(root,text="Reset",font=20,bg="orange",command=reset)
     button_4=Button(root,text="check",font=20,bg="orange",)
 
-    button_1.grid(row=8,column=1)
+    button_1.grid(row=9,column=1)
     button_2.place(x=300,y=200)
     button_3.place(x=300,y=150)
     button_4.place(x=300,y=110)
