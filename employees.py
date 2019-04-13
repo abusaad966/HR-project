@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
+import sqlite3
 import datetime
 
 
-if __name__=="__main__":
+def main():
 
     root = Tk()
 
@@ -48,28 +49,31 @@ if __name__=="__main__":
     def register():
             answer = messagebox.askquestion("Confirm", "Do you want to continue")
             if answer == 'yes':
-                database = open("database.txt","a")
-                database.write('Driver name : '+entrey_1.get()+"\n")
-                database.write('National id : ' + entrey_2.get()+"\n")
-                database.write('Address : ' + entrey_3.get()+"\n")
-                database.write('Phone : ' + entrey_4.get()+"\n")
-                database.write('Truck No : ' + entrey_5.get()+"\n")
-                database.write("=================NEW===================="+"\n")
+                name = str(entrey_1.get())
+                id = entrey_2.get()
+                address=str(entrey_3.get())
+                phone=entrey_4.get()
+                truck=entrey_5.get()
+
+                # Create a database
+                db = sqlite3.connect("database.db")
+                db.execute("create table if not exists employees(driverName text,NatioanlID int,address text,Phone int,truckNO int)")
+                db.execute("insert into employees (driverName,NatioanlID,address,Phone,truckNO) values (?,?,?,?,?)",(name,id,address,phone,truck))
                 messagebox.showinfo("completed","Registered successfully!")
             else :
-                messagebox.showinfo("Canceled","Register canceled")
                 entrey_1.delete(0,END)
                 entrey_2.delete(0,END)
                 entrey_3.delete(0,END)
                 entrey_4.delete(0,END)
                 entrey_5.delete(0,END)
-
     def reset():
         entrey_1.delete(0, END)
         entrey_2.delete(0, END)
         entrey_3.delete(0, END)
         entrey_4.delete(0, END)
         entrey_5.delete(0, END)
+
+
 
 
 
@@ -89,3 +93,5 @@ if __name__=="__main__":
 
 
     root.mainloop()
+
+if __name__=="__main__" : main()
